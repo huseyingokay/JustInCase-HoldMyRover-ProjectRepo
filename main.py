@@ -1,12 +1,13 @@
 import smtplib
-
+from gui import Gui
 from string import Template
-
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-MY_ADDRESS = 'huseyingokay_1999@hotmail.com'
-PASSWORD = 'XRAYSKINGSTAR8520'
+sender1 = Gui()
+MY_ADDRESS = sender1.MY_ADDRESS
+PASSWORD = sender1.PASSWORD
+MESSAGE = sender1.MESSAGE
 
 def main():
     # set up the SMTP server
@@ -14,13 +15,11 @@ def main():
     s.starttls()
     s.login(MY_ADDRESS, PASSWORD)
 
-    msg = MIMEMultipart()       # create a message
-
-    # add in the actual person name to the message template
-    message ='Ahmet'
+    # create a message
+    msg = MIMEMultipart()
 
     # Prints out the message body for our sake
-    print(message)
+    print(MESSAGE)
 
     # setup the parameters of the message
     msg['From']=MY_ADDRESS
@@ -28,7 +27,7 @@ def main():
     msg['Subject']="This is TEST"
 
     # add in the message body
-    msg.attach(MIMEText(message, 'plain'))
+    msg.attach(MIMEText(MESSAGE, 'plain'))
 
     # send the message via the server set up earlier.
     s.send_message(msg)
