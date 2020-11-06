@@ -38,8 +38,8 @@ def main():
     # add in the message body
     msg.attach(MIMEText(MESSAGE, "plain"))
 
-    if (ATTACH != ''):
-        sender2.attach(msg,ATTACH)
+    if (len(ATTACH) != 0):
+        sender2.attach(msg, ATTACH)
 
 
 
