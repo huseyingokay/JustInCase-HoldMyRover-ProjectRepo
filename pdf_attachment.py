@@ -1,9 +1,8 @@
 #!/usr/bin/python
 from email.mime.application import MIMEApplication
 
-
 class Attachment:
-    def attach(self,msg,ATTACH):
+    def attach(self, msg, ATTACH):
         with open(ATTACH, "rb") as f:
             attach = MIMEApplication(f.read(),_subtype="pdf")
 

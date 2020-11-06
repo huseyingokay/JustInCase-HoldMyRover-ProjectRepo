@@ -12,6 +12,7 @@ PASSWORD = SENDER.PASSWORD
 MESSAGE = SENDER.MESSAGE
 ATTACH = SENDER.ATTACH
 SUBJECT = SENDER.SUBJECT
+OUTPUT_PDF = SENDER.OUTPUT_PDF
 
 # create a message
 msg = MIMEMultipart()
@@ -32,8 +33,10 @@ def main():
 
     # add in the message body
     msg.attach(MIMEText(MESSAGE, "plain"))
+    SENDER.pdfReadAndWrite(ATTACH)
 
     if (len(ATTACH) != 0):
+        PDF_HANDLER.attach(msg, OUTPUT_PDF)
         PDF_HANDLER.attach(msg, ATTACH)
 
     # send the message via the server set up earlier.
