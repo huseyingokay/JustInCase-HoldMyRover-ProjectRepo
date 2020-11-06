@@ -1,31 +1,26 @@
 import smtplib
 from gui import Gui
 from pdf_attachment import Attachment
-from string import Template
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
 
-sender1 = Gui()
-sender2 = Attachment()
-MY_ADDRESS = sender1.MY_ADDRESS
-RECEIVER_ADDRESS = sender1.RECEIVER_ADDRESS
-PASSWORD = sender1.PASSWORD
-MESSAGE = sender1.MESSAGE
-ATTACH = sender1.ATTACH
-SUBJECT = sender1.SUBJECT
+SENDER = Gui()
+PDF_HANDLER = Attachment()
+MY_ADDRESS = SENDER.MY_ADDRESS
+RECEIVER_ADDRESS = SENDER.RECEIVER_ADDRESS
+PASSWORD = SENDER.PASSWORD
+MESSAGE = SENDER.MESSAGE
+ATTACH = SENDER.ATTACH
+SUBJECT = SENDER.SUBJECT
 
+# create a message
 msg = MIMEMultipart()
-
 
 def main():
     # set up the SMTP server
     s = smtplib.SMTP(host='smtp-mail.outlook.com', port=587)
     s.starttls()
     s.login(MY_ADDRESS, PASSWORD)
-
-    # create a message
-
 
     # Prints out the message body for our sake
     print(MESSAGE)
@@ -39,9 +34,7 @@ def main():
     msg.attach(MIMEText(MESSAGE, "plain"))
 
     if (len(ATTACH) != 0):
-        sender2.attach(msg, ATTACH)
-
-
+        PDF_HANDLER.attach(msg, ATTACH)
 
     # send the message via the server set up earlier.
     s.send_message(msg)

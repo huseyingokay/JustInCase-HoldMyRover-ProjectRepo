@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import smtplib
 from email.mime.application import MIMEApplication
 
 
@@ -10,4 +9,3 @@ class Attachment:
 
         attach.add_header('Content-Disposition','attachment',filename=str(ATTACH))
         msg.attach(attach)
-
