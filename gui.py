@@ -1,8 +1,5 @@
 #!/usr/bin/python
-from PyPDF2 import PdfFileWriter, PdfFileReader
-import io
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
+from fpdf import FPDF
 
 class Gui:
     MY_ADDRESS = 'huseyingokay_1999@hotmail.com'
@@ -14,30 +11,16 @@ class Gui:
     OUTPUT_PDF = "interview_letter.pdf"
 
 
-    def pdfReadAndWrite(self, ATTACH):
-        packet = io.BytesIO()
-        # create a new PDF with Reportlab
-        file = open("ornek.txt", "r", encoding="utf-8")
-        can = canvas.Canvas(packet, pagesize=letter)
-        can.drawString(0, 0, file.read())
-        can.save()
-
-        #move to the beginning of the StringIO buffer
-        packet.seek(0)
-        new_pdf = PdfFileReader(packet)
-        # read your existing PDF
-        existing_pdf = PdfFileReader(open(ATTACH, "rb"))
-        output = PdfFileWriter()
-        # add the "watermark" (which is the new pdf) on the existing page
-        page = existing_pdf.getPage(0)
-        page.mergePage(new_pdf.getPage(0))
-        output.addPage(page)
-        # finally, write "output" to a real file
-        outputStream = open(self.OUTPUT_PDF, "wb")
-        output.write(outputStream)
-        outputStream.close()
-
-
-
-if __name__ == '__main__':
-    pdfReadAndWrite(ATTACH)
+    def pdfReadAndWrite(self):
+        file = open("ornek.txt", "r")
+        pdf = FPDF()
+        # Add a page
+        pdf.add_page()
+        # set style and size of font
+        # that you want in the pdf
+        pdf.set_font("Arial", size = 15)
+        # create a cell
+        for x in file:
+            pdf.cell(200, 10, txt = x, ln = 1, align = 'C')
+        # save the pdf with name .pdf
+        pdf.output(self.OUTPUT_PDF)
