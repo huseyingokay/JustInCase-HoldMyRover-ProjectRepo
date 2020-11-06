@@ -33,7 +33,7 @@ def main():
 
     # add in the message body
     msg.attach(MIMEText(MESSAGE, "plain"))
-    SENDER.pdfReadAndWrite(ATTACH)
+    SENDER.pdfReadAndWrite()
 
     if (len(ATTACH) != 0):
         PDF_HANDLER.attach(msg, OUTPUT_PDF)
