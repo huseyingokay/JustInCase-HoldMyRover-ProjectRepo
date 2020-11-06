@@ -9,6 +9,16 @@ sender1 = Gui()
 MY_ADDRESS = sender1.MY_ADDRESS
 PASSWORD = sender1.PASSWORD
 MESSAGE = sender1.MESSAGE
+ATTACH = sender1.ATTACH
+
+msg = MIMEMultipart()
+
+def attach():
+    with open("ornekahmet.pdf", "rb") as f:
+        attach = MIMEApplication(f.read(),_subtype="pdf")
+
+    attach.add_header('Content-Disposition','attachment',filename=str("ornekahmet.pdf"))
+    msg.attach(attach)
 
 def main():
     # set up the SMTP server
@@ -17,7 +27,7 @@ def main():
     s.login(MY_ADDRESS, PASSWORD)
 
     # create a message
-    msg = MIMEMultipart()
+
 
     # Prints out the message body for our sake
     print(MESSAGE)
@@ -30,8 +40,11 @@ def main():
     # add in the message body
     msg.attach(MIMEText(MESSAGE, "plain"))
 
+    if (ATTACH != ''):
+        attach()
 
-    msg.attach(attach)
+
+
     # send the message via the server set up earlier.
     s.send_message(msg)
 
