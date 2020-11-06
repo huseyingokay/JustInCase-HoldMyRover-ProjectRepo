@@ -1,24 +1,22 @@
 import smtplib
 from gui import Gui
+from pdf_attachment import Attachment
 from string import Template
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 
 sender1 = Gui()
+sender2 = Attachment()
 MY_ADDRESS = sender1.MY_ADDRESS
+RECEIVER_ADDRESS = sender1.RECEIVER_ADDRESS
 PASSWORD = sender1.PASSWORD
 MESSAGE = sender1.MESSAGE
 ATTACH = sender1.ATTACH
+SUBJECT = sender1.SUBJECT
 
 msg = MIMEMultipart()
 
-def attach():
-    with open("ornekahmet.pdf", "rb") as f:
-        attach = MIMEApplication(f.read(),_subtype="pdf")
-
-    attach.add_header('Content-Disposition','attachment',filename=str("ornekahmet.pdf"))
-    msg.attach(attach)
 
 def main():
     # set up the SMTP server
@@ -34,14 +32,14 @@ def main():
 
     # setup the parameters of the message
     msg['From']=MY_ADDRESS
-    msg['To']="cagatay.savasli@ozu.edu.tr"
-    msg['Subject']="This is TEST"
+    msg['To']=RECEIVER_ADDRESS
+    msg['Subject']=SUBJECT
 
     # add in the message body
     msg.attach(MIMEText(MESSAGE, "plain"))
 
     if (ATTACH != ''):
-        attach()
+        sender2.attach(msg)
 
 
 
