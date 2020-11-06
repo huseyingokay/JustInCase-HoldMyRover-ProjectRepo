@@ -3,6 +3,7 @@ from gui import Gui
 from string import Template
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 
 sender1 = Gui()
 MY_ADDRESS = sender1.MY_ADDRESS
@@ -27,8 +28,10 @@ def main():
     msg['Subject']="This is TEST"
 
     # add in the message body
-    msg.attach(MIMEText(MESSAGE, 'plain'))
+    msg.attach(MIMEText(MESSAGE, "plain"))
 
+
+    msg.attach(attach)
     # send the message via the server set up earlier.
     s.send_message(msg)
 
