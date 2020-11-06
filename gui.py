@@ -9,7 +9,7 @@ class Gui:
     PASSWORD = 'XRAYSKINGSTAR8520'
     MESSAGE = 'denemee'
     SUBJECT = 'This is Test'
-    ATTACH = 'a'
+    ATTACH = 'ornekahmet.pdf'
 
 
 

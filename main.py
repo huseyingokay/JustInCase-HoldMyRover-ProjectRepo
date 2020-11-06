@@ -39,7 +39,7 @@ def main():
     msg.attach(MIMEText(MESSAGE, "plain"))
 
     if (ATTACH != ''):
-        sender2.attach(msg)
+        sender2.attach(msg,ATTACH)
 
 
 
