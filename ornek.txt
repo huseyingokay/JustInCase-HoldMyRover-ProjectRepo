@@ -1,14 +1,16 @@
-(RECEIVER)
+(SENDER)
 8 Sue Circle
 Smithtown, CA 08067
-909-555-5555
+(PHONE)
+(SENDER_ADDRESS)
 
-August 15, 2020
+(DATE)
 
-George Gilhooley
+(RECEIVER)
 Times Union
 87 Delaware Road
 Hatfield, CA 08065
+(RECEIVER_ADDRESS)
 
 Dear (RECEIVER),
 
@@ -21,12 +23,12 @@ I strive continually for excellence.
 I provide exceptional contributions to customer service for all customers.
 With a BS degree in Computer Programming, I have a comprehensive understanding of the full lifecycle for software development projects. I also have experience in learning and applying new technologies as appropriate. Please see my resume for additional information on my experience.
 
-I can be reached anytime via email at john.donaldson@emailexample.com or by cell phone, 909-555-5555.
+I can be reached anytime via email at john.donaldson@emailexample.com or by cell phone, (PHONE).
 
 Thank you for your time and consideration. I look forward to speaking with you about this employment opportunity.
 
 Sincerely,
 
-(RECEIVER) (signature hard copy letter)
+(SENDER) (signature hard copy letter)
 
-(RECEIVER)
+(SENDER)
