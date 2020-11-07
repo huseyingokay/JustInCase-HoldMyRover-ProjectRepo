@@ -4,23 +4,31 @@
 import fileinput
 from fpdf import FPDF
 import time
+from mainGui import *
 
 class Gui:
-    def __init__(self):
-        self.SENDER_ADDRESS = 'huseyingokay_1999@hotmail.com'
-        self.RECEIVER_ADDRESS = ['huseyin.gokay@ozu.edu.tr', 'cagatay.savasli@ozu.edu.tr', 'atahan.caldir@ozu.edu.tr']
-        self.RECEIVER = "Hüseyin Gökay"
-        self.SENDER = "Ahmet Çağatay Savaşlı"
-        self.POSITION = ".NET Developer"
-        self.UNIVERSITY = "Ozyegin University"
-        self.FACULTY = "Computer Science"
-        self.PASSWORD = 'XRAYSKINGSTAR8520'
-        self.MESSAGE = 'My job application letter'
-        self.SUBJECT = 'Ahmet Çağatay Savaşlı - Job Application Form'
+    def addVariables(self):
+        self.SENDER_ADDRESS = mainWindow.senderMail.text()
+        self.RECEIVER_ADDRESS = mainWindow.receiverMail.text()
+        self.RECEIVER = mainWindow.receiverName.text()
+        self.SENDER = mainWindow.senderName.text()
+        self.POSITION = mainWindow.appPosition.text()
+        self.UNIVERSITY = mainWindow.senderSchool.text()
+        self.FACULTY = mainWindow.senderDiv.text()
+        self.PASSWORD = mainWindow.senderPass.text()
+        self.MESSAGE = mainWindow.mailMessage.text()
+        self.SUBJECT = mainWindow.mailSubject.text()
+
+        #########
+        self.RECEIVER_INFORMATION = mainWindow.receiverInfo.text()
+        self.SENDER_SKILLS = mainWindow.senderSkills.text()
+        self.SENDER_MORE = mainWindow.senderMore.text()
+        #########
+
         self.ATTACH = 'ornekahmet.pdf'
         self.OUTPUT_PDF = "interview_letter.pdf"
         self.DATE = time.strftime("%x")
-        self.PHONE = "555-555-4123"
+        self.PHONE = mainWindow.senderPhone.text()
         self.outputPdfNames = []
 
     def pdfReadAndWrite(self, number):
@@ -58,3 +66,16 @@ class Gui:
             # save the pdf with name .pdf
         self.outputPdfNames.append(str(number) + self.OUTPUT_PDF)
         pdf.output(self.outputPdfNames[number])
+
+
+app = QtWidgets.QApplication(sys.argv)
+
+mainWindow = Ui_MAIN()
+filesWindow = Ui_FILES()
+gui = Gui()
+
+mainWindow.show()
+
+mainWindow.appButton.clicked.connect(gui.addVariables)
+
+sys.exit(app.exec_())
