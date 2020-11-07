@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
-
+import fileinput
 from fpdf import FPDF
 
 class Gui:
@@ -14,32 +14,21 @@ class Gui:
     ATTACH = 'ornekahmet.pdf'
     OUTPUT_PDF = "interview_letter.pdf"
 
-
-
     def pdfReadAndWrite(self):
-        file = open("ornek.txt", "rt")
+        file = open("ornek.txt", "r+")
+        fileData = file.readlines()
         pdf = FPDF()
         # Add a page
         pdf.add_page()
         # set style and size of font
         # that you want in the pdf
-        pdf.set_font("Arial", size = 15)
+        pdf.set_font("Arial", size = 11)
         # create a cell
-        for x in file:
-            row = file.read()
-            self.parameterFinder(row, file)
-            pdf.cell(200, 10, txt = x, ln = 1, align = 'C')
+        for x in fileData:
+            if("(RECEIVER)" in x):
+                x = x.replace("(RECEIVER)", self.RECEIVER)
+            elif("(POSITION)" in x):
+                x = x.replace("(POSITION)", self.POSITION)
+            pdf.multi_cell(185, 5, txt = x, align = 'L')
         # save the pdf with name .pdf
         pdf.output(self.OUTPUT_PDF)
-
-    def parameterFinder(self, line, file):
-        if('(RECEIVER)' in line):
-            row = row.replace('(RECEIVER)', self.RECEIVER)
-            file.close()
-            file = open("ornek.txt", "a")
-            file.write(row)
-        if("(POSITION)" in line):
-            row = line.replace("(POSITION)", self.POSITION)
-            file.close()
-            file = open("ornek.txt", "a")
-            file.write(row)
