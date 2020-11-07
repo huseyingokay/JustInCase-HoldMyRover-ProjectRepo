@@ -44,7 +44,7 @@ class Main():
         self.ATTACH = self.SENDER.ATTACH
         self.SUBJECT = self.SENDER.SUBJECT
         self.OUTPUT_PDF = self.SENDER.OUTPUT_PDF
-
+        self.SENDER.compareSkills()
         mainWindow.close()
         filesWindow.show()
 

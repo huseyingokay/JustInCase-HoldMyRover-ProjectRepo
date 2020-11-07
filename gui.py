@@ -8,7 +8,6 @@ from mainGui import *
 
 class Gui:
     def addVariables(self, mainWindow):
-        print("addVariables worked")
         self.SENDER_ADDRESS = mainWindow.senderMail.text()
         self.RECEIVER_ADDRESS = mainWindow.receiverMail.text()
         self.RECEIVER = mainWindow.receiverName.text()
@@ -30,11 +29,25 @@ class Gui:
         self.OUTPUT_PDF = "interview_letter.pdf"
         self.DATE = time.strftime("%x")
         self.PHONE = mainWindow.senderPhone.text()
-        print("addVariables worked")
+        self.TOP_SKILLS = []
+        self.compareSkills()
         self.pdfReadAndWrite()
 
+    def compareSkills(self):
+        topSkills = []
+        senderSkills = self.SENDER_SKILLS.split(",")
+
+        for skill in senderSkills:
+            if(skill in self.RECEIVER_INFORMATION):
+                topSkills.append(skill)
+
+        self.TOP_SKILLS = topSkills
+
+    def listToString(self, s):
+        str1 = ", "
+        return str1.join(s)
+
     def pdfReadAndWrite(self):
-        print("in")
         file = open("ornek.txt", "r+")
         fileData = file.readlines()
         pdf = FPDF()
@@ -64,6 +77,17 @@ class Gui:
                 x = x.replace("(FACULTY)", self.FACULTY)
             if("(PHONE)" in x):
                 x = x.replace("(PHONE)", self.PHONE)
+            if("(TOP_SKILLS)" in x):
+                top_skills = ""
+                if(self.TOP_SKILLS != []):
+                    top_skills = self.listToString(self.TOP_SKILLS)
+                    x = x.replace("(TOP_SKILLS)", "I also have experiences in" +top_skills+ "as appropriate.")
+                else:
+                    x = x.replace("(TOP_SKILLS)", "")
+
+
+            if("(SENDER_MORE)" in x):
+                x = x.replace("(SENDER_MORE)", self.SENDER_MORE)
 
             pdf.multi_cell(185, 5, txt = x, align = 'L')
             # save the pdf with name .pdf

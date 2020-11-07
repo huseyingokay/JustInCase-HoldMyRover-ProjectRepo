@@ -21,7 +21,8 @@ The role is very appealing to me, and I believe that my strong technical experie
 I have successfully designed, developed, and supported live-use applications.
 I strive continually for excellence.
 I provide exceptional contributions to customer service for all customers.
-With a BS degree in Computer Programming, I have a comprehensive understanding of the full lifecycle for software development projects. I also have experience in learning and applying new technologies as appropriate. Please see my resume for additional information on my experience.
+With a BS degree in Computer Programming, I have a comprehensive understanding of the full lifecycle for software development projects. (TOP_SKILLS)Please see my resume for additional information on my experience.
+(SENDER_MORE)
 
 I can be reached anytime via email at john.donaldson@emailexample.com or by cell phone, (PHONE).
 
