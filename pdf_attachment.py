@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#--coding: utf-8--
 from email.mime.application import MIMEApplication
 
 class Attachment:

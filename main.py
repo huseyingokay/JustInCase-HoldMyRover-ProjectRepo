@@ -1,3 +1,4 @@
+#--coding: utf-8--
 import smtplib
 from gui import Gui
 from pdf_attachment import Attachment
@@ -37,7 +38,6 @@ def main():
 
     if (len(ATTACH) != 0):
         PDF_HANDLER.attach(msg, OUTPUT_PDF)
-        PDF_HANDLER.attach(msg, ATTACH)
 
     # send the message via the server set up earlier.
     s.send_message(msg)
