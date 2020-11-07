@@ -6,23 +6,25 @@ from fpdf import FPDF
 import time
 
 class Gui:
-    SENDER_ADDRESS = 'huseyingokay_1999@hotmail.com'
-    RECEIVER_ADDRESS = 'huseyin.gokay@ozu.edu.tr'
-    RECEIVER = "Hüseyin Bey"
-    SENDER = "Ahmet Çağatay Savaşlı"
-    POSITION = ".NET Developer"
-    UNIVERSITY = "Ozyegin University"
-    FACULTY = "Computer Science"
-    PASSWORD = 'XRAYSKINGSTAR8520'
-    MESSAGE = 'My job application letter'
-    SUBJECT = 'Ahmet Çağatay Savaşlı - Job Application Form'
-    ATTACH = 'ornekahmet.pdf'
-    OUTPUT_PDF = "interview_letter.pdf"
-    DATE = time.strftime("%x")
-    PHONE = "555-555-4123"
+    def __init__(self):
+        self.SENDER_ADDRESS = 'huseyingokay_1999@hotmail.com'
+        self.RECEIVER_ADDRESS = ['huseyin.gokay@ozu.edu.tr', 'cagatay.savasli@ozu.edu.tr', 'atahan.caldir@ozu.edu.tr']
+        self.RECEIVER = "Hüseyin Gökay"
+        self.SENDER = "Ahmet Çağatay Savaşlı"
+        self.POSITION = ".NET Developer"
+        self.UNIVERSITY = "Ozyegin University"
+        self.FACULTY = "Computer Science"
+        self.PASSWORD = 'XRAYSKINGSTAR8520'
+        self.MESSAGE = 'My job application letter'
+        self.SUBJECT = 'Ahmet Çağatay Savaşlı - Job Application Form'
+        self.ATTACH = 'ornekahmet.pdf'
+        self.OUTPUT_PDF = "interview_letter.pdf"
+        self.DATE = time.strftime("%x")
+        self.PHONE = "555-555-4123"
+        self.outputPdfNames = []
 
-    def pdfReadAndWrite(self):
-        file = open("letter.txt", "r+")
+    def pdfReadAndWrite(self, number):
+        file = open("ornek.txt", "r+")
         fileData = file.readlines()
         pdf = FPDF()
         # Add a page
@@ -42,7 +44,7 @@ class Gui:
             if("(SENDER_ADDRESS)" in x):
                 x = x.replace("(SENDER_ADDRESS)", self.SENDER_ADDRESS)
             if("(RECEIVER_ADDRESS)" in x):
-                x = x.replace("(RECEIVER_ADDRESS)", self.RECEIVER_ADDRESS)
+                x = x.replace("(RECEIVER_ADDRESS)", self.RECEIVER_ADDRESS[number])
             if("(DATE)" in x):
                 x = x.replace("(DATE)", self.DATE)
             if("(UNIVERSITY)" in x):
@@ -53,5 +55,6 @@ class Gui:
                 x = x.replace("(PHONE)", self.PHONE)
 
             pdf.multi_cell(185, 5, txt = x, align = 'L')
-        # save the pdf with name .pdf
-        pdf.output(self.OUTPUT_PDF)
+            # save the pdf with name .pdf
+        self.outputPdfNames.append(str(number) + self.OUTPUT_PDF)
+        pdf.output(self.outputPdfNames[number])

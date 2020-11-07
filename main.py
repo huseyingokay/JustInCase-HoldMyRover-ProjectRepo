@@ -13,34 +13,36 @@ PASSWORD = SENDER.PASSWORD
 MESSAGE = SENDER.MESSAGE
 ATTACH = SENDER.ATTACH
 SUBJECT = SENDER.SUBJECT
-OUTPUT_PDF = SENDER.OUTPUT_PDF
+OUTPUT_PDF = SENDER.outputPdfNames
 
 # create a message
-msg = MIMEMultipart()
+
 
 def main():
     # set up the SMTP server
-    s = smtplib.SMTP(host='smtp-mail.outlook.com', port=587)
-    s.starttls()
-    s.login(MY_ADDRESS, PASSWORD)
-
-    # Prints out the message body for our sake
-    print(MESSAGE)
-
-    # setup the parameters of the message
-    msg['From']=MY_ADDRESS
-    msg['To']=RECEIVER_ADDRESS
-    msg['Subject']=SUBJECT
-
-    # add in the message body
-    msg.attach(MIMEText(MESSAGE, "plain"))
-    SENDER.pdfReadAndWrite()
-
-    if (len(ATTACH) != 0):
-        PDF_HANDLER.attach(msg, OUTPUT_PDF)
 
     # send the message via the server set up earlier.
-    s.send_message(msg)
+    for y in range(len(RECEIVER_ADDRESS)):
+        msg = MIMEMultipart()
+        
+        s = smtplib.SMTP(host='smtp-mail.outlook.com', port=587)
+        s.starttls()
+        s.login(MY_ADDRESS, PASSWORD)
+        # Prints out the message body for our sake
+        print(MESSAGE)
+        # setup the parameters of the message
+        msg['From'] = MY_ADDRESS
+        msg['Subject'] = SUBJECT
+
+        # add in the message body
+        msg.attach(MIMEText(MESSAGE, "plain"))
+        SENDER.pdfReadAndWrite(y)
+
+        if (len(ATTACH) != 0):
+            PDF_HANDLER.attach(msg, OUTPUT_PDF[y])
+        msg['To'] = RECEIVER_ADDRESS[y]
+        print(RECEIVER_ADDRESS[y])
+        s.send_message(msg)
 
     # Terminate the SMTP session and close the connection
     s.quit()
