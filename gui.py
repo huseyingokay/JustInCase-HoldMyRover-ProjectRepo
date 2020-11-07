@@ -2,10 +2,11 @@
 # -*- coding:utf-8 -*-
 import fileinput
 from fpdf import FPDF
+import time
 
 class Gui:
     SENDER_ADDRESS = 'huseyingokay_1999@hotmail.com'
-    RECEIVER_ADDRESS = 'huseyin.gokay@ozu.edu.tr'
+    RECEIVER_ADDRESS = 'cagatay.savasli@ozu.edu.tr'
     RECEIVER = "Hüseyin Bey"
     SENDER = "Ahmet Boi"
     POSITION = "SOFTWARE"
@@ -14,7 +15,7 @@ class Gui:
     SUBJECT = 'AMETTEN GELDI'
     ATTACH = 'ornekahmet.pdf'
     OUTPUT_PDF = "interview_letter.pdf"
-    DATE = "August 15, 2020"
+    DATE = time.strftime("%x")
     PHONE = "555-555-4123"
 
     def pdfReadAndWrite(self):
