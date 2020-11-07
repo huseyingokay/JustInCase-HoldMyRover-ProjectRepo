@@ -4,25 +4,38 @@
 import fileinput
 from fpdf import FPDF
 import time
+from mainGui import *
 
 class Gui:
-    SENDER_ADDRESS = 'huseyingokay_1999@hotmail.com'
-    RECEIVER_ADDRESS = 'huseyin.gokay@ozu.edu.tr'
-    RECEIVER = "Hüseyin Bey"
-    SENDER = "Ahmet Çağatay Savaşlı"
-    POSITION = ".NET Developer"
-    UNIVERSITY = "Ozyegin University"
-    FACULTY = "Computer Science"
-    PASSWORD = 'XRAYSKINGSTAR8520'
-    MESSAGE = 'My job application letter'
-    SUBJECT = 'Ahmet Çağatay Savaşlı - Job Application Form'
-    ATTACH = 'ornekahmet.pdf'
-    OUTPUT_PDF = "interview_letter.pdf"
-    DATE = time.strftime("%x")
-    PHONE = "555-555-4123"
+    def addVariables(self, mainWindow):
+        print("addVariables worked")
+        self.SENDER_ADDRESS = mainWindow.senderMail.text()
+        self.RECEIVER_ADDRESS = mainWindow.receiverMail.text()
+        self.RECEIVER = mainWindow.receiverName.text()
+        self.SENDER = mainWindow.senderName.text()
+        self.POSITION = mainWindow.appPosition.text()
+        self.UNIVERSITY = mainWindow.senderSchool.text()
+        self.FACULTY = mainWindow.senderDiv.text()
+        self.PASSWORD = mainWindow.senderPass.text()
+        self.MESSAGE = mainWindow.mailMessage.toPlainText()
+        self.SUBJECT = mainWindow.mailSubject.text()
+
+        #########
+        self.RECEIVER_INFORMATION = mainWindow.receiverInfo.toPlainText()
+        self.SENDER_SKILLS = mainWindow.senderSkills.toPlainText()
+        self.SENDER_MORE = mainWindow.senderMore.toPlainText()
+        #########
+
+        self.ATTACH = 'ornekahmet.pdf'
+        self.OUTPUT_PDF = "interview_letter.pdf"
+        self.DATE = time.strftime("%x")
+        self.PHONE = mainWindow.senderPhone.text()
+        print("addVariables worked")
+        self.pdfReadAndWrite()
 
     def pdfReadAndWrite(self):
-        file = open("letter.txt", "r+")
+        print("in")
+        file = open("ornek.txt", "r+")
         fileData = file.readlines()
         pdf = FPDF()
         # Add a page
@@ -53,5 +66,6 @@ class Gui:
                 x = x.replace("(PHONE)", self.PHONE)
 
             pdf.multi_cell(185, 5, txt = x, align = 'L')
-        # save the pdf with name .pdf
+            # save the pdf with name .pdf
+
         pdf.output(self.OUTPUT_PDF)
