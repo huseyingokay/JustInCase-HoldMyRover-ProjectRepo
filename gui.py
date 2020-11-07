@@ -7,7 +7,8 @@ import time
 from mainGui import *
 
 class Gui:
-    def addVariables(self):
+    def addVariables(self, mainWindow):
+        print("addVariables worked")
         self.SENDER_ADDRESS = mainWindow.senderMail.text()
         self.RECEIVER_ADDRESS = mainWindow.receiverMail.text()
         self.RECEIVER = mainWindow.receiverName.text()
@@ -16,22 +17,24 @@ class Gui:
         self.UNIVERSITY = mainWindow.senderSchool.text()
         self.FACULTY = mainWindow.senderDiv.text()
         self.PASSWORD = mainWindow.senderPass.text()
-        self.MESSAGE = mainWindow.mailMessage.text()
+        self.MESSAGE = mainWindow.mailMessage.toPlainText()
         self.SUBJECT = mainWindow.mailSubject.text()
 
         #########
-        self.RECEIVER_INFORMATION = mainWindow.receiverInfo.text()
-        self.SENDER_SKILLS = mainWindow.senderSkills.text()
-        self.SENDER_MORE = mainWindow.senderMore.text()
+        self.RECEIVER_INFORMATION = mainWindow.receiverInfo.toPlainText()
+        self.SENDER_SKILLS = mainWindow.senderSkills.toPlainText()
+        self.SENDER_MORE = mainWindow.senderMore.toPlainText()
         #########
 
         self.ATTACH = 'ornekahmet.pdf'
         self.OUTPUT_PDF = "interview_letter.pdf"
         self.DATE = time.strftime("%x")
         self.PHONE = mainWindow.senderPhone.text()
-        self.outputPdfNames = []
+        print("addVariables worked")
+        self.pdfReadAndWrite()
 
-    def pdfReadAndWrite(self, number):
+    def pdfReadAndWrite(self):
+        print("in")
         file = open("ornek.txt", "r+")
         fileData = file.readlines()
         pdf = FPDF()
@@ -52,7 +55,7 @@ class Gui:
             if("(SENDER_ADDRESS)" in x):
                 x = x.replace("(SENDER_ADDRESS)", self.SENDER_ADDRESS)
             if("(RECEIVER_ADDRESS)" in x):
-                x = x.replace("(RECEIVER_ADDRESS)", self.RECEIVER_ADDRESS[number])
+                x = x.replace("(RECEIVER_ADDRESS)", self.RECEIVER_ADDRESS)
             if("(DATE)" in x):
                 x = x.replace("(DATE)", self.DATE)
             if("(UNIVERSITY)" in x):
@@ -64,18 +67,5 @@ class Gui:
 
             pdf.multi_cell(185, 5, txt = x, align = 'L')
             # save the pdf with name .pdf
-        self.outputPdfNames.append(str(number) + self.OUTPUT_PDF)
-        pdf.output(self.outputPdfNames[number])
 
-
-app = QtWidgets.QApplication(sys.argv)
-
-mainWindow = Ui_MAIN()
-filesWindow = Ui_FILES()
-gui = Gui()
-
-mainWindow.show()
-
-mainWindow.appButton.clicked.connect(gui.addVariables)
-
-sys.exit(app.exec_())
+        pdf.output(self.OUTPUT_PDF)

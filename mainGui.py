@@ -110,21 +110,18 @@ class Ui_MAIN(QtWidgets.QWidget):
         self.label_17.setObjectName("label_17")
         self.verticalLayout_6.addWidget(self.label_17)
         self.senderPhone = QtWidgets.QLineEdit(self.verticalLayoutWidget_6)
-        self.senderPhone.setEchoMode(QtWidgets.QLineEdit.Password)
         self.senderPhone.setObjectName("senderPhone")
         self.verticalLayout_6.addWidget(self.senderPhone)
         self.label_14 = QtWidgets.QLabel(self.verticalLayoutWidget_6)
         self.label_14.setObjectName("label_14")
         self.verticalLayout_6.addWidget(self.label_14)
         self.senderSchool = QtWidgets.QLineEdit(self.verticalLayoutWidget_6)
-        self.senderSchool.setEchoMode(QtWidgets.QLineEdit.Password)
         self.senderSchool.setObjectName("senderSchool")
         self.verticalLayout_6.addWidget(self.senderSchool)
         self.label_15 = QtWidgets.QLabel(self.verticalLayoutWidget_6)
         self.label_15.setObjectName("label_15")
         self.verticalLayout_6.addWidget(self.label_15)
         self.senderDiv = QtWidgets.QLineEdit(self.verticalLayoutWidget_6)
-        self.senderDiv.setEchoMode(QtWidgets.QLineEdit.Password)
         self.senderDiv.setObjectName("senderDiv")
         self.verticalLayout_6.addWidget(self.senderDiv)
         self.tabWidget.addTab(self.tab_3, "")
@@ -223,7 +220,7 @@ class Ui_FILES(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
         self.setupUi(self)
-        
+
     def setupUi(self, FILES):
         FILES.setObjectName("FILES")
         FILES.resize(502, 515)
